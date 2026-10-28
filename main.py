@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 from basic_agent import router as basic_agent_router
 from decision_agent import router as decision_agent_router
+from text_agent import router as text_agent_router
 # 1. Load variables from .env file
 load_dotenv()
 
@@ -18,6 +19,7 @@ app = FastAPI(
 add_scalar_reference(app, route="/docs")
 app.include_router(basic_agent_router)
 app.include_router(decision_agent_router)
+app.include_router(text_agent_router)
 
 
 @app.get("/", summary="Hello World Endpoint")

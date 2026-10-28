@@ -25,16 +25,16 @@ async def decision_agent(body: AgentRequest):
         # Route TypeSafe/Jev through OpenRouter System One, not TypeSafe directly
         client = AsyncTypeSafeClient(
             api_key=api_key,
-            base_url="https://openrouter.ai/api",
+            base_url=os.getenv("OPENROUTER_BASE_URL"),
         )
         model = TypeSafeModel(
-            "jev-latest",
+            os.getenv("OPENROUTER_DECISION_MODEL"),
             provider=TypeSafeProvider(typesafe_client=client),
         )
 
         agent = Agent(
             model=model,
-            instructions="Is this request harmful?",
+            instructions="You are my honest companion please answer the question truthfully.",
             output_type=bool,
         )
 
